@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Highcharts from 'highcharts';
 import { HighchartsChart, withHighcharts, XAxis, YAxis, LineSeries } from 'react-jsx-highcharts';
 import io from 'socket.io-client';
-import ReactHighCharts from 'react-highcharts';
 
 class App extends Component {
   constructor() {
@@ -23,11 +22,6 @@ class App extends Component {
     this.socket.on('data', data => {
       data = parseInt(data.slice(0, -1));
       this.addData(data);
-      // let chart = this.refs.chart.getChart();
-      // let series = chart.series[0];
-      // let shift = series.data.length > 20;
-      //
-      // chart.series[0].addPoint(data, true, shift);
     });
   }
 
@@ -58,7 +52,7 @@ class App extends Component {
 
 
     return (
-      <div style={{ textAlign: 'center', background: color, height: '800px', border: '2px solid red' }}>
+      <div style={{ textAlign: 'center', background: color, height: '800px' }}>
         <h1 style={{ marginTop: '10px', fontSize: '80px', color: '#fff' }}>AutoOx: {pulseOx.length === 0 ? 0 : pulseOx[pulseOx.length-1]}%</h1>
         <div style={config}>
           <HighchartsChart>
@@ -81,7 +75,6 @@ const config = {
   border: '2px solid #afaeaf',
   boxShadow: '0px 5px 20px 0px #868387',
   margin: '30px',
-  // padding: '20px'
 };
 
 export default withHighcharts(App, Highcharts);
